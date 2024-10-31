@@ -12,13 +12,13 @@ router.post('/login',(req,res)=>{
     const { email, password } = req.body;
     if(!req.session.user){
     if(req.body.email==credential.email&&req.body.password==credential.password){
-      req.session.user=req.body.email;
+      req.session.user= email;
       res.redirect('/route/home')
-    }else if(req.body.email!==credential.email&&req.body.password==credential.password){
+    }else if(email!==credential.email&&password==credential.password){
         res.render('login',{message:'Invalid username', email, password: ''})
-    }else if(req.body.email==credential.email&&req.body.password!==credential.password){
+    }else if(email==credential.email&&password!==credential.password){
         res.render('login',{message:'Invalid password', email, password: ''})
-    }else if(req.body.email!==credential.email&&req.body.password!==credential.password){
+    }else if(email!==credential.email&&password!==credential.password){
         res.render('login',{message:'Invalid username and password', email, password: ''})
     }
 }else{
