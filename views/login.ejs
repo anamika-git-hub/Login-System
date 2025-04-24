@@ -1,22 +1,43 @@
-<%-include('header')-%>
+<%- include('header') -%>
 <form action="/route/login" method="post" class="p-4 d-flex flex-column justify-content-center align-items-center position-relative text-white">
     <h1 class="mb-3 display-5">Login</h1>
-    <% if (typeof message !== 'undefined') { %>
-        <p style="color:red"><%= message %></p>
-    <% } %>
 
-    <div class="input-box d-flex justify-content-between align-items-center position-relative mb-3 w-100">
-        <input type="email" name="email" class="rounded-pill pl-3 text-white w-100 h-100" placeholder="Email" value="<%= email || '' %>" required>
+    <% if (message) { %>
+        <p style="color: #32CD32; font-weight: bold;"><%= message %></p>
+    <% } %>
+    <div class="input-box d-flex flex-column align-items-start position-relative mb-3 w-100">
+        <input
+            type="email"
+            name="email"
+            class="rounded-pill pl-3 text-white w-100 h-100 <%= emailError ? 'input-error' : '' %>"
+            placeholder="Email"
+            value="<%= email || '' %>"
+            required
+        >
         <ion-icon name="mail-outline"></ion-icon>
+        <% if (emailError) { %>
+            <div class="error-message"><%= emailError %></div> 
+        <% } %>
     </div>
 
-    <div class="input-box d-flex justify-content-between align-items-center position-relative mb-3 w-100">
-        <input type="password" name="password" id="passwordInput" class="rounded-pill pl-3 text-white w-100 h-100" placeholder="Password" required>
+    
+    <div class="input-box d-flex flex-column align-items-start position-relative mb-3 w-100">
+        <input
+            type="password"
+            name="password"
+            id="passwordInput"
+            class="rounded-pill pl-3 text-white w-100 h-100 <%= passwordError ? 'input-error' : '' %>"
+            placeholder="Password"
+            required
+        >
         <ion-icon name="lock-closed-outline"></ion-icon>
         <ion-icon id="togglePassword" name="eye-off-outline" style="cursor: pointer; position: absolute; right: 50px;"></ion-icon>
+        <% if (passwordError) { %>
+            <div class="error-message"><%= passwordError %></div> 
+        <% } %>
     </div>
 
     <button type="submit" class="submit-btn btn btn-light rounded-pill w-100">Submit</button>
 </form>
 
-<%-include('footer')-%>
+<%- include('footer') -%>

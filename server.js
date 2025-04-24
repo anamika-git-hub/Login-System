@@ -33,7 +33,7 @@ app.get('/',(req,res)=>{
     if(req.session.user){
         res.render('home',{user:req.session.user})
     }else{
-        res.render('login',{ email: '', password: '', message: '' })
+        res.render('login',{ email: '', password: '', message: '', emailError: '', passwordError: '' })
     }
 })
 
